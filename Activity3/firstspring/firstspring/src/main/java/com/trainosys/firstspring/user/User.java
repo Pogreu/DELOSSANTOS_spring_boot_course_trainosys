@@ -1,13 +1,13 @@
-package com.trainosys.firstspring;
+package com.trainosys.firstspring.user;
 
-public class Users {
+public class User {
     private int id;
     private String name;
     private String email;
 
-    public Users() {}
+    public User() {}
 
-    public Users(int id, String name, String email) {
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
