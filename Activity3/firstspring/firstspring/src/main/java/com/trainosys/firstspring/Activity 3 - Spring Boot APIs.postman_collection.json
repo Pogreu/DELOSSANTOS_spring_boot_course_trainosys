@@ -1,0 +1,234 @@
+{
+  "info": {
+    "_postman_id": "c5700b17-f5d9-4689-8776-c53508d96406",
+    "name": "Activity 3 - Spring Boot APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19569371"
+  },
+  "item": [
+    {
+      "name": "Users Module",
+      "item": [
+        {
+          "name": "Delete User 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put User 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post New User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products Module",
+      "item": [
+        {
+          "name": "Get Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Product 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put Product 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by Electronics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put Product 1 Stock 10",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart Items Module",
+      "item": [
+        {
+          "name": "Get Cart 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Cart 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put Cart 1 Item 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cart 1 Item 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cart 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Cart 1 Total",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
