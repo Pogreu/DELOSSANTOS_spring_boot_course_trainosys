@@ -25,12 +25,12 @@ public class ProductController {
 
     @PostMapping
     public String addProduct(@RequestBody Product newProduct) {
-        return "Product added! Name: " + newProduct.getName() + ", Price: " + newProduct.getPrice();
+        return "Naidagdag ang produktong nangangalan na: " + newProduct.getName() + ", Presyo ay: " + newProduct.getPrice();
     }
 
     @PutMapping("/{id}")
     public String updateProduct(@PathVariable int id, @RequestBody Product updatedData) {
-        return "Updated product ID " + id + " with Name: " + updatedData.getName();
+        return "Binago ang produkto na may ID " + id + " with Name: " + updatedData.getName();
     }
 
     @DeleteMapping("/{id}")
