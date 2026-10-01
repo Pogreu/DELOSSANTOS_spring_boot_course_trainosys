@@ -1,50 +1,77 @@
 package com.trainosys.firstspring.product;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
 public class ProductController {
 
-    private List<Product> products = new ArrayList<>(List.of(
-            new Product(1, "Mouse", 499.0, "Electronics", 15),
-            new Product(2, "Keyboard", 1200.0, "Electronics", 8)
-    ));
+    private final ProductService productService;
 
-    @GetMapping
-    public List<Product> getAllProducts() {
-        return products;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping("/{id}")
-    public String getProductById(@PathVariable int id) {
-        return "Nakuha ang product na may ID: " + id;
+    @GetMapping("/api/public/products")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public String addProduct(@RequestBody Product newProduct) {
-        return "Naidagdag ang produktong nangangalan na: " + newProduct.getName() + ", Presyo ay: " + newProduct.getPrice();
+    @GetMapping("/api/public/products/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+        try {
+            Product product = productService.getProductById(id);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
-    @PutMapping("/{id}")
-    public String updateProduct(@PathVariable int id, @RequestBody Product updatedData) {
-        return "Binago ang produkto na may ID " + id + " with Name: " + updatedData.getName();
+    @PostMapping("/api/admin/products")
+    public ResponseEntity<String> addProduct(@RequestBody Product newProduct) {
+        try {
+            String status = productService.createProduct(newProduct);
+            return new ResponseEntity<>(status, HttpStatus.CREATED);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable int id) {
-        return "Tinanggal ang product na may ID: " + id;
+    @PutMapping("/api/admin/products/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestBody Product updatedData) {
+        try {
+            String status = productService.updateProduct(id, updatedData);
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @GetMapping("/category/{category}")
-    public String getProductsByCategory(@PathVariable String category) {
-        return "Hinahanap ang mga produkto sa kategoryang: " + category;
+    @DeleteMapping("/api/admin/products/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable int id) {
+        try {
+            String status = productService.deleteProduct(id);
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @PutMapping("/{id}/stock/{quantity}")
-    public String setProductStock(@PathVariable int id, @PathVariable int quantity) {
-        return "Inupdate ang Stock ng Product ID " + id + " tungo sa: " + quantity + " pcs";
+    @GetMapping("/api/public/products/category/{category}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
+        return new ResponseEntity<>(productService.getProductsByCategory(category), HttpStatus.OK);
+    }
+
+    @PutMapping("/api/admin/products/{id}/stock/{quantity}")
+    public ResponseEntity<String> setProductStock(@PathVariable int id, @PathVariable int quantity) {
+        try {
+            String status = productService.setProductStock(id, quantity);
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 }

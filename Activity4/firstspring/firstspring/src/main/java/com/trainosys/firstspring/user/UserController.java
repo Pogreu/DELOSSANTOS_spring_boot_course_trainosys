@@ -1,45 +1,74 @@
 package com.trainosys.firstspring.user;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/users") // Base path for all endpoints in this controller
+@RestController("/api")
 public class UserController {
 
-    private List<User> users = new ArrayList<>(List.of(
-            new User(1, "Ana", "ana@mail.com"),
-            new User(2, "John", "john@mail.com")
-    ));
+    private final UserService userService;
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return users;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public String getUserById(@PathVariable int id) {
-        return "Nakuha ang user na may ID: " + id;
+    @GetMapping("/admin/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public String createUser(@RequestBody User newUser) {
-        return "User created! Name: " + newUser.getName() + ", Email: " + newUser.getEmail();
+    @GetMapping("/admin/users/{id}")
+    public ResponseEntity<String> getUserById(@PathVariable int id) {
+        try {
+            User user = userService.getUserById(id);
+            String status = "User found: " + user.getName() + ", Email: " + user.getEmail();
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @PutMapping("/{id}")
-    public String updateUser(@PathVariable int id, @RequestBody User updatedData) {
-        return "Updated user ID " + id + " with Name: " + updatedData.getName() + ", Email: " + updatedData.getEmail();
+    @PostMapping("/public/users")
+    public ResponseEntity<String> createUser(@RequestBody User newUser) {
+        try {
+            String status = userService.createUser(newUser);
+            return new ResponseEntity<>(status, HttpStatus.CREATED);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return "Tinanggal ang user na may ID: " + id;
+    @PutMapping("/admin/users/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User updatedData) {
+        try {
+            String status = userService.updateUser(id, updatedData);
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 
-    @GetMapping("/email/{email}")
-    public String getUserByEmail(@PathVariable String email) {
-        return "Hinahanap ang user gamit ang email na: " + email;
+    @DeleteMapping("/admin/users/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        try {
+            String status = userService.deleteUser(id);
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
+    }
+
+    @GetMapping("/admin/users/email/{email}")
+    public ResponseEntity<String> getUserByEmail(@PathVariable String email) {
+        try {
+            User user = userService.getUserByEmail(email);
+            String status = "User found: " + user.getName() + ", Email: " + user.getEmail();
+            return new ResponseEntity<>(status, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(e.getReason(), e.getStatusCode());
+        }
     }
 }
